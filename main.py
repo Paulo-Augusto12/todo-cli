@@ -2,6 +2,7 @@ from enum import Enum
 from pathlib import Path
 import argparse
 import json
+import datetime
 
 
 class PossibleStatus(Enum):
@@ -34,7 +35,9 @@ if args.command == 'add':
     tasks = {'tasks': []}
   
   task_id = tasks['tasks'][-1]['id'] + 1 if len(tasks['tasks']) >= 1 else 1
-  task.update({'id': task_id})
+  
+  datetime_now = str(datetime.datetime.now())
+  task.update({'id': task_id, 'created_at': datetime_now, 'updated_at': datetime_now})
   
   tasks['tasks'].append(task)
   
