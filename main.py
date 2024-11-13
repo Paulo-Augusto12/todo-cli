@@ -33,7 +33,7 @@ if args.command == 'add':
   except FileNotFoundError:
     tasks = {'tasks': []}
   
-  task_id = len(tasks['tasks']) + 1
+  task_id = tasks['tasks'][-1]['id'] + 1 if len(tasks['tasks']) >= 1 else 1
   task.update({'id': task_id})
   
   tasks['tasks'].append(task)
@@ -72,6 +72,7 @@ if args.command == 'delete':
         with open('tasks.json', 'w') as f:
           tasks['tasks'] = new_task_list
           json.dump(tasks, f, indent=2)
+          print(f"Tarefa deletada")
       else:
         print('Você deve passar um Id para a task que deseja deletar')
         exit(1)
