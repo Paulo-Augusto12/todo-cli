@@ -14,6 +14,7 @@ parser = argparse.ArgumentParser(description='Gerencie sua lista de tarefas')
 
 parser.add_argument('command', help='Comando a ser executado (list, add, remove, update, mark-todo, mark-inprogress, mark-done)')
 parser.add_argument('task_title', nargs='?',help='Tarefa a ser adicionada ou removida')
+parser.add_argument('task_description', nargs='?', help='Descrição da tarefa que está sendo adicionada')
 parser.add_argument('--status', choices=[0, 1, 2], type=int, help='Insira um status de tarefa para exibir os resultados de acordo com esse status')
 parser.add_argument('--task_id', type=int, help='Id da tarefa que você está selecionando')
 args = parser.parse_args()
@@ -24,7 +25,7 @@ if args.command == 'add':
     print("O título da tarefa não pode ser vazio")
     exit(1)
   
-  task = {"title": args.task_title, "status": PossibleStatus.todo.value }
+  task = {"title": args.task_title, "description": args.task_description,"status": PossibleStatus.todo.value }
   
   print(f"Adicionando a tarefa {task['title']} a lista de tarefas")
   
