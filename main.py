@@ -83,10 +83,11 @@ if args.command == 'delete':
   except FileNotFoundError:
     print('Arquivo de tarefas não encontrado, por favor adicione uma tarefa com o comando add para criar o arquivo')
 
-def update_task_status(tasks, task_id, status):
+def update_task_status(tasks, task_id, status, task_title):
   for task in tasks:
     if task['id'] == task_id:
       task['status'] = status
+      task['title'] = task_title
       return tasks
   return tasks
 
@@ -97,7 +98,7 @@ if args.command == 'update':
       tasks = json.load(f)
       if args.task_id:
         if args.status:
-          updated_tasks = update_task_status(tasks['tasks'], args.task_id, args.status)
+          updated_tasks = update_task_status(tasks['tasks'], args.task_id, args.status, args.task_title)
           
           with open('tasks.json', 'w') as f:
             tasks['tasks'] = updated_tasks
